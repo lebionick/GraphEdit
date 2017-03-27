@@ -10,17 +10,18 @@ namespace GraphesLabWork1
     {
         static void Main(string[] args)
         {
+            //hardcoded intialization
             //Graph G = new Graph(new List<int>(3) { 0, 1, 2, 1, 0 }, new List<int>(3) { 1, 2, 3, 3, 2 });
-            Graph G = new Graph(@"C:\Users\kalmar\Desktop\g.txt");
-            //G.Remove(1); G.Remove(0);
-            G.Remove(3); 
-            G.Add(1, 3); 
+            Graph G = new Graph(@"..\..\input.txt");
+            //G.Remove(3); 
+            //G.Add(1, 3); 
             G.PrintToConsole();
-            G.PrintToFile(@"C:\Users\kalmar\Desktop\g1.gv");
+            G.PrintToFile(@"..\..\output.gv");
             Console.ReadKey();
+            
         }
     }
-    class Graph
+    public class Graph
     {
         List<int> _I, _J, _H, _L;
         int startdel = -1;
@@ -33,6 +34,8 @@ namespace GraphesLabWork1
         public Graph(string path)
         {
             string[] lines = System.IO.File.ReadAllLines(path);
+            if (lines.Length < 2)
+                throw new Exception("input file is too short");
             List<int> I = new List<int>();
             List<int> J = new List<int>();
             for (int i = 1; i < lines.Length; i++)
@@ -97,8 +100,6 @@ namespace GraphesLabWork1
             {
                 fw.WriteLine(begin);
                 List<int> skip = getDeleted();
-                //foreach (int i in skip)
-                //    Console.WriteLine(i);
                 for (int i = 0; i < _I.Count; i++)
                 {
                     if (skip!=null && skip.Contains(i))
@@ -165,6 +166,14 @@ namespace GraphesLabWork1
                 }
                 _L[final] = num;
             }
+        }
+        //returns list of coinc vertexes
+        public List<int> ViewVertex(int vertexNum)
+        {
+            List<int> result = new List<int>();
+            for (int i = _H[vertexNum]; i != -1; i = _L[i])
+                result.Add(i);
+            return result;
         }
     }
 }

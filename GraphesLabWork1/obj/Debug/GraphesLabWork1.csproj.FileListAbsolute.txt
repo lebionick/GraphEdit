@@ -4,3 +4,9 @@ c:\users\kalmar\documents\visual studio 2013\Projects\GraphesLabWork1\GraphesLab
 c:\users\kalmar\documents\visual studio 2013\Projects\GraphesLabWork1\GraphesLabWork1\obj\Debug\GraphesLabWork1.csprojResolveAssemblyReference.cache
 c:\users\kalmar\documents\visual studio 2013\Projects\GraphesLabWork1\GraphesLabWork1\obj\Debug\GraphesLabWork1.exe
 c:\users\kalmar\documents\visual studio 2013\Projects\GraphesLabWork1\GraphesLabWork1\obj\Debug\GraphesLabWork1.pdb
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork1\bin\Debug\GraphesLabWork1.exe.config
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork1\obj\Debug\GraphesLabWork1.exe
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork1\obj\Debug\GraphesLabWork1.pdb
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork1\bin\Debug\GraphesLabWork1.exe
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork1\bin\Debug\GraphesLabWork1.pdb
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork1\obj\Debug\GraphesLabWork1.csprojResolveAssemblyReference.cache

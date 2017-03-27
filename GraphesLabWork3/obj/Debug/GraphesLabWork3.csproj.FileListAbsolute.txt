@@ -1,0 +1,2 @@
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork3\bin\Debug\GraphesLabWork3.exe.config
+C:\Users\kalmar\Desktop\gedit\GraphEdit\GraphesLabWork3\obj\Debug\GraphesLabWork3.csprojResolveAssemblyReference.cache
