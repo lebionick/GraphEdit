@@ -10,7 +10,10 @@ namespace GraphesLabWork3
     {
         static void Main(string[] args)
         {
-            BucketGraph WG = new BucketGraph(@"..\..\input.txt");
+			//BucketGraph WG = new BucketGraph(@"../../input.txt");
+			var WG = new WGraph(@"../../input.txt");
+			//WG.PrintToFile(@"../../output.gv");
+			var BG = new BucketGraph(WG);
         }
     }
     class BucketGraph
@@ -18,11 +21,13 @@ namespace GraphesLabWork3
         WGraph G;
         List<List<int>> Q;
 
-        public BucketGraph(string path)
+		public BucketGraph(WGraph wg)
         {
-            G = new WGraph(path);
+			G = wg;
             Q = new List<List<int>>();
-            for (int i = 0; i < graphRange(G) + 1 ; i++)
+			int n = graphRange(G);
+
+            for (int i = 0; i < n + 1 ; i++)
                 Q.Add(new List<int>());
         }
 
@@ -39,7 +44,7 @@ namespace GraphesLabWork3
                 //для каждой вершины черпака
                 for (int j = 0; j < Q[i].Count; j++)
                 {
-                    List<int> vert = G.G.ViewVertex(j);
+                    List<int> vert = G.ViewVertex(j);
                     //для каждой смежной вершины
                     for (int k = 0; k < vert.Count; k++)
                     {
@@ -62,53 +67,20 @@ namespace GraphesLabWork3
         {
             return vert;
         }
+
         int graphRange(WGraph g)
         {
-            List<int> different = new List<int>();
-            foreach (int weight in g.W)
+            var different = new List<int>();
+
+			foreach (int weight in g._W)
             {
                 if (!different.Contains(weight))
                 {
                     different.Add(weight);
                 }
             }
+
             return different.Count;
         }
-    }
-    public class WGraph
-    {
-        public Graph G
-        {
-            get;
-            private set;
-        }
-        public List<int> W
-        {
-            get;
-            private set;
-        }
-        public WGraph(Graph g, List<int> w)
-        {
-            G = g;
-            W = w;
-        }
-        public WGraph(string path)
-        {
-            string[] lines = System.IO.File.ReadAllLines(path);
-            if (lines.Length < 2)
-                throw new Exception("input file is too short");
-            List<int> I = new List<int>();
-            List<int> J = new List<int>();
-            List<int> W = new List<int>();
-            for (int i = 1; i < lines.Length; i++)
-            {
-                string[] sublines = lines[i].Split(' ');
-                I.Add(Int32.Parse(sublines[0]));
-                J.Add(Int32.Parse(sublines[1]));
-                W.Add(Int32.Parse(sublines[2]));
-            }
-            G = new Graph(I, J);
-        }
-
     }
 }
