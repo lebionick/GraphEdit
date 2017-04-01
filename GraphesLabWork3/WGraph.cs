@@ -13,9 +13,14 @@ namespace GraphesLabWork3
 			private set;
 		}
 
+		public WGraph(WGraph wg)
+		{
+			build(wg, wg._W);
+		}
+
 		public WGraph(Graph g, List<int> w) : base(g)
 		{
-			build(g, w);
+			_W = w;
 		}
 
 		void build(Graph g, List<int> w)
@@ -45,6 +50,21 @@ namespace GraphesLabWork3
 			}
 
 			build(new Graph(I, J), W);
+		}
+
+		public int getWeight(int from, int to)
+		{
+			int weight = -1;
+			for (int i = 0; i < _I.Count; i++)
+			{
+				if ((_I[i] == from && _J[i] == to)||(_I[i] == to && _J[i] == from))
+				{
+					if (!getDeleted().Contains(i))
+						weight = _W[i];
+					break;
+				}
+			}
+			return weight;
 		}
 
 		public override void PrintToFile(string path)

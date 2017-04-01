@@ -126,13 +126,13 @@ namespace GraphesLabWork1
 		}
 		protected List<int> getDeleted()
 		{
-			if (startdel == -1)
-				return null;
 			List<int> deleted = new List<int>();
-			for (int i = startdel; i != -1; i = _L[i])
-			{
-				deleted.Add(i);
-			}
+
+			if (startdel != -1)
+				for (int i = startdel; i != -1; i = _L[i])
+				{
+					deleted.Add(i);
+				}
 			return deleted;
 		}
 
@@ -153,6 +153,7 @@ namespace GraphesLabWork1
 			}
 			if (_H[from] == -1)
 				_H[from] = newNum;
+			
 			int final = _H[from];
 			for (int j = final; j != -1; j = _L[j])
 				final = j;
@@ -161,33 +162,50 @@ namespace GraphesLabWork1
 		}
 		public void Remove(int num)
 		{
-			for (int i = 0; i < _H.Count; i++)
+			if (getDeleted().Contains(num))
+				return;
+			//rewrite. simple put arc to root and link L[num]->pastfirst
+			if (startdel == -1)
 			{
-				if (_H[i] == num)
+				startdel = num;
+				_L[num] = -1;
+			}
+			else {
+				for (int i = 0; i < _L.Count; i++)
 				{
-					_H[i] = _L[_H[i]];
-					_L[num] = -1;
+					if (_L[i] == num)
+					{
+						_L[i] = _L[num];
+						break;
+					}
+				}
+				_L[num] = startdel;
+				startdel = num;
+			}
+		}
+		public void Remove(int from, int to)
+		{
+			for (int i = 0; i < _I.Count; i++)
+			{
+				if ((_I[i] == from && _J[i] == to)||(_I[i] == to && _J[i] == from))
+				{
+					Remove(i);
 					break;
 				}
-			}
-			if (startdel == -1)
-				startdel = num;
-			else
-			{
-				int final = startdel;
-				for (int i = final; i != -1; i = _L[i])
-				{
-					final = i;
-				}
-				_L[final] = num;
 			}
 		}
 		//returns list of coinc vertexes
 		public List<int> ViewVertex(int vertexNum)
 		{
 			List<int> result = new List<int>();
-			for (int i = _H[vertexNum]; i != -1; i = _L[i])
-				result.Add(i);
+			var del = getDeleted();
+			for (int i = 0; i < _I.Count; i++)
+			{
+				if (_I[i] == vertexNum && !del.Contains(i))
+					result.Add(_J[i]);
+				if (_J[i] == vertexNum && !del.Contains(i))
+					result.Add(_I[i]);
+			}
 			return result;
 		}
 	}
