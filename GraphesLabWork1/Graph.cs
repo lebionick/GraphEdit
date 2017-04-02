@@ -164,7 +164,7 @@ namespace GraphesLabWork1
 		{
 			if (getDeleted().Contains(num))
 				return;
-			//rewrite. simple put arc to root and link L[num]->pastfirst
+
 			if (startdel == -1)
 			{
 				startdel = num;

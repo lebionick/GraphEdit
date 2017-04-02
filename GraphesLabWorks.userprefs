@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{3A3E9617-D393-4B52-A02C-0B7F97AAD981}|Default">
+  <MonoDevelop.Ide.ItemProperties.GraphesLabWork3 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="GraphesLabWork2/Program.cs">
+    <Files>
+      <File FileName="GraphesLabWork3/Program.cs" Line="14" Column="1" />
+      <File FileName="GraphesLabWork1/Graph.cs" Line="97" Column="5" />
+      <File FileName="GraphesLabWork2/Program.cs" Line="91" Column="21" />
+      <File FileName="GraphesLabWork1/WGraph.cs" Line="6" Column="26" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.GraphesLabWork1 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.GraphesLabWork2 PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

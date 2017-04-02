@@ -10,12 +10,10 @@ namespace GraphesLabWork3
     {
         static void Main(string[] args)
         {
-			//BucketGraph WG = new BucketGraph(@"../../input.txt");
-			var WG = new WGraph(@"../../input.txt");
-			//WG.Remove(0, 2); WG.Remove(2, 3); WG.Remove(1, 6); WG.Remove(3, 5); WG.Remove(4, 5); WG.Remove(2, 6);
-			WG.PrintToFile(@"../../output.gv");
+			var WG = new WGraph(@"../../input2.txt");
+			WG.PrintToFile(@"../../output2.gv");
 			var BG = new BucketGraph(WG);
-			BG.GetSkeleton(0).PrintToFile(@"../../skeleton.gv");
+			BG.GetSkeleton(0).PrintToFile(@"../../skeleton2.gv");
         }
     }
     class BucketGraph

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphesLabWork1;
 
-namespace GraphesLabWork3
+namespace GraphesLabWork1
 {
 	public class WGraph : Graph
 	{
