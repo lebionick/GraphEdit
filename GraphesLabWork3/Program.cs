@@ -12,16 +12,18 @@ namespace GraphesLabWork3
         {
 			var WG = new WGraph(@"../../input2.txt");
 			WG.PrintToFile(@"../../output2.gv");
-			var BG = new BucketGraph(WG);
+			var BG = new BucketDijkstra(WG);
 			BG.GetSkeleton(0).PrintToFile(@"../../skeleton2.gv");
         }
     }
-    class BucketGraph
+
+    class BucketDijkstra
     {
+		//исходный граф
         WGraph G;
 		//черпаки
         List<List<int>> Q;
-		//хранит путь до вершины
+		//хранит предка вершины
 		List<int> Ancest;
 		//максимальное значение веса
 		int maxw;
@@ -30,13 +32,13 @@ namespace GraphesLabWork3
 		//список просмотренных
 		List<int> Seen;
 
-		public BucketGraph(WGraph wg)
+		public BucketDijkstra(WGraph wg)
         {
-			G = wg;
+			G = new WGraph(wg);
 			Ancest = new List<int>();
             Q = new List<List<int>>();
-			//начало черпаков - с 1 или с мин?
-			maxw = graphRange(wg).Max();
+			//предполагается что все ребра имеют целое значение
+			maxw = G._W.Max();
 			n = G._H.Count;
 
             for (int i = 0; i < maxw + 1 ; i++)
@@ -47,83 +49,69 @@ namespace GraphesLabWork3
 			
 			Seen = new List<int>();
         }
-
+		int? findBucket(int vert)
+		{
+			for (int i = 0; i < Q.Count; i++)
+				if (Q[i].Contains(vert))
+				   return i;
+			return null;
+		}
+		void changeBucket(int vert, int from, int to)
+		{
+			Q[from].Remove(vert);
+			Q[to].Add(vert);
+		}
+		//returns skeleton graph
         public WGraph GetSkeleton(int root)
         {
 			var Skel = new WGraph(G);
-
 			Q[0].Add(root);
 			Ancest[root] = root;
+
 			while(!QisEmpty()){
-                //для каждой вершины черпака
+                //для каждой вершины 0го черпака
                 for (int j = 0; j < Q[0].Count; j++)
                 {
 					int v = Q[0][j];
+					//посмотреть смежные вершины
                     List<int> vert = G.ViewVertex(v);
-					Console.WriteLine("вершина: {0}", v);
-					foreach (var f in vert)
-						Console.Write(f);
-					Console.WriteLine();
 					//для каждой смежной вершины
 					for (int k = 0; k < vert.Count; k++)
 					{
+						int curv = vert[k];
 						//если просмотрена - не трогаем
-						if (Seen.Contains(vert[k]))
+						if (Seen.Contains(curv))
 							continue;
-						//если вершина смотрится в первый раз
-						if (Ancest[vert[k]] == -1)
+						
+						int? bucketNum = findBucket(curv);
+						int curDist = G.getWeight(v, curv);
+
+						if (bucketNum == null)
 						{
-							bool has = false;
-							for (int y = 0; y < Q.Count; y++)
-								for (int u = 0; u < Q[y].Count; u++)
-									if (Q[y][u] == vert[k])
-									{
-										has = true;
-										break;
-									}
-							if(!has)
-							{
-								Q[G.getWeight(v, vert[k])].Add(vert[k]);
-								Ancest[vert[k]] = v;
-							}
+							Q[curDist].Add(curv);
+							Ancest[curv] = v;
 						}
-						else {
-							//иначе - ищем эту вершину
-							int curd = G.getWeight(v, vert[k]);
-							for (int i = 0; i < Q.Count; i++)
-							{
-								for (int l = 0; l < Q[i].Count; l++)
-								{
-									if (Q[i][l] == vert[k])
-									{
-										//если улучшаем расстояние, то выкидываем прошлое ребро
-										if (i>curd)
-										{
-											Console.WriteLine("добавляем ребро {0} в ряд {1}", vert[k], G.getWeight(v, vert[k]));
-											Q[i].RemoveAt(l);
-											Q[G.getWeight(v, vert[k])].Add(vert[k]);
-											Skel.Remove(Ancest[vert[k]], vert[k]);
-											Ancest[vert[k]] = v;
-										}
-										//если ухудшаем, то выкидываем текущее
-										else {
-											Skel.Remove(v, vert[k]);
-										}
-									}
-								}
-							}
+						else if (curDist < bucketNum)
+						{
+							Skel.Remove(Ancest[curv], curv);
+							Ancest[curv] = v;
+							changeBucket(curv, (int)bucketNum, curDist);
 						}
+						else
+						{
+							Skel.Remove(v, curv);
+						}
+
 					}
 					Seen.Add(Q[0][j]);
                 }
-				//Seen.AddRange(Q[0]);
-
+				//смещаем очереди
 				Q.RemoveAt(0);
 				Q.Add(new List<int>());
-				Console.WriteLine("iter");
             }
 			return Skel;
         }
+
 		bool QisEmpty()
 		{
 			foreach (var q in Q)
@@ -132,19 +120,5 @@ namespace GraphesLabWork3
 			return true;
 		}
 
-        List<int> graphRange(WGraph g)
-        {
-            var different = new List<int>();
-
-			foreach (int weight in g._W)
-            {
-                if (!different.Contains(weight))
-                {
-                    different.Add(weight);
-                }
-            }
-
-			return different;
-        }
     }
 }

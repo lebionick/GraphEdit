@@ -17,13 +17,17 @@ namespace GraphesLabWork2
 			KK.GetTree().PrintToFile(@"../../tree.gv");
 		}
 	}
+
 	class Kraskal
 	{
 		WGraph WG;
+		//array of paints for naive methods
 		int[] M;
+		//compressed path of same-painted verts
 		int[] id;
+		//size of each connectivity component
 		int[] size;
-
+		//you can choose between two methods
 		delegate int finder(int i);
 		delegate void unioner(int x, int y);
 		finder find;
@@ -35,26 +39,21 @@ namespace GraphesLabWork2
 			//naiveMode();
 			logcompMode(wg._H.Count);
 		}
-
+		//retrns skeleton graph
 		public WGraph GetTree()
 		{
 			var I = new List<int>();
 			var J = new List<int>();
 			var W = new List<int>();
-			M = new int[WG._H.Count];
-			for (int i = 0; i < M.Length; i++)
-				M[i] = i;
-			
-			var sEdges = getTransp(WG._W);
+
+			int[] sEdges = getTransp(WG._W);
 
 			for (int i = 0; i < sEdges.Length; i++)
 			{
 				int ednum = sEdges[i];
 				int from = WG._I[ednum];
 				int to = WG._J[ednum];
-
 				//Console.WriteLine("ребро номер {0}\tиз {1} в {2}",ednum,from,to);
-				//Console.WriteLine("{0}\t{1}",M[from],M[to]);
 				if (!makesCycle(from, to))
 				{
 					//Console.WriteLine("добавить из {0} в {1}", WG._I[ednum], WG._J[ednum]);
@@ -77,7 +76,7 @@ namespace GraphesLabWork2
 				return false;
 			}
 		}
-
+		//switch to logarithmic methods
 		void logcompMode(int n)
 		{
 			id = new int[n];
@@ -114,6 +113,9 @@ namespace GraphesLabWork2
 
 		void naiveMode()
 		{
+			M = new int[WG._H.Count];
+			for (int i = 0; i<M.Length; i++)
+				M[i] = i;
 			find = naiveFind;
 			union = naiveUnion;
 		}
@@ -133,7 +135,7 @@ namespace GraphesLabWork2
 			}
 			Console.WriteLine();
 		}
-
+		//returns number of vertexes sorted by their weights
 		int[] getTransp(List<int> W)
 		{
 			var V = new int[W.Count];

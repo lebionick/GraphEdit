@@ -1,11 +1,12 @@
-﻿<Properties StartupConfiguration="{3A3E9617-D393-4B52-A02C-0B7F97AAD981}|Default">
+﻿<Properties StartupConfiguration="{C1822267-ED61-4D90-8CD4-7FBD6AA5727D}|Default">
   <MonoDevelop.Ide.ItemProperties.GraphesLabWork3 PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="GraphesLabWork2/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GraphesLabWork3/Program.cs">
     <Files>
-      <File FileName="GraphesLabWork3/Program.cs" Line="14" Column="1" />
-      <File FileName="GraphesLabWork1/Graph.cs" Line="97" Column="5" />
-      <File FileName="GraphesLabWork2/Program.cs" Line="91" Column="21" />
-      <File FileName="GraphesLabWork1/WGraph.cs" Line="6" Column="26" />
+      <File FileName="GraphesLabWork1/Graph.cs" Line="206" Column="1" />
+      <File FileName="GraphesLabWork1/WGraph.cs" Line="86" Column="19" />
+      <File FileName="GraphesLabWork1/Program.cs" Line="16" Column="28" />
+      <File FileName="GraphesLabWork2/Program.cs" Line="50" Column="4" />
+      <File FileName="GraphesLabWork3/Program.cs" Line="19" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -14,5 +15,6 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.GraphesLabWork1 PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.GraphesLabWork2 PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

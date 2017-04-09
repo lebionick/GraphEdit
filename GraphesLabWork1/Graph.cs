@@ -26,7 +26,7 @@ namespace GraphesLabWork1
 			get;
 			protected set;
 		}
-		//, _J, _H, _L;
+
 		protected int startdel = -1;
 
 		protected Graph()
@@ -66,35 +66,27 @@ namespace GraphesLabWork1
 		{
 			if (I.Count() != J.Count)
 				throw new Exception("intial arrays do not match");
+			
 			int m = I.Count;
 			int n = Math.Max(I.Max(), J.Max()) + 1;
+
 			_I = new List<int>(I);
 			_J = new List<int>(J);
-
 			_L = new List<int>();
+			_H = new List<int>();
+
 			for (int i = 0; i < m; i++)
 				_L.Add(-1);
-			_H = new List<int>();
+
 			for (int i = 0; i < n; i++)
 				_H.Add(-1);
 
-			for (int i = 0; i < m; i++)
-			{
-				if (_H[_I[i]] == -1)
-				{
-					_H[_I[i]] = i;
-				}
-				else if (_L[_H[_I[i]]] == -1)
-					_L[_H[_I[i]]] = i;
-				else
-				{
-					int final = _L[_H[_I[i]]];
-					for (int j = final; j != -1; j = _L[j])
-						final = j;
-
-					_L[final] = i;
-				}
-			}
+			for(int k = 0; k < m; k++)
+            {
+                int v = _I[k];
+				_L[k] = _H[v];
+                _H[v] = k;
+            }
 		}
 
 		public void PrintToConsole()
@@ -114,7 +106,7 @@ namespace GraphesLabWork1
 			using (System.IO.StreamWriter fw = new System.IO.StreamWriter(path))
 			{
 				fw.WriteLine(begin);
-				List<int> skip = getDeleted();
+				var skip = new HashSet<int>(getDeleted());
 				for (int i = 0; i < _I.Count; i++)
 				{
 					if (skip != null && skip.Contains(i))
@@ -151,37 +143,17 @@ namespace GraphesLabWork1
 				_I.Add(from); _J.Add(to);
 				_L.Add(-1);
 			}
-			if (_H[from] == -1)
-				_H[from] = newNum;
 			
-			int final = _H[from];
-			for (int j = final; j != -1; j = _L[j])
-				final = j;
-
-			_L[final] = newNum;
+			_L[newNum] = _H[from];
+			_H[from] = newNum;
 		}
 		public void Remove(int num)
 		{
 			if (getDeleted().Contains(num))
 				return;
-
-			if (startdel == -1)
-			{
-				startdel = num;
-				_L[num] = -1;
-			}
-			else {
-				for (int i = 0; i < _L.Count; i++)
-				{
-					if (_L[i] == num)
-					{
-						_L[i] = _L[num];
-						break;
-					}
-				}
-				_L[num] = startdel;
-				startdel = num;
-			}
+		
+			_L[num] = startdel;
+			startdel = num;
 		}
 		public void Remove(int from, int to)
 		{
@@ -194,7 +166,7 @@ namespace GraphesLabWork1
 				}
 			}
 		}
-		//returns list of coinc vertexes
+		//returns list of coincident vertexes
 		public List<int> ViewVertex(int vertexNum)
 		{
 			List<int> result = new List<int>();

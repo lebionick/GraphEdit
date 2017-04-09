@@ -5,8 +5,10 @@ using GraphesLabWork1;
 
 namespace GraphesLabWork1
 {
+	//weighted graph
 	public class WGraph : Graph
 	{
+		//weights
 		public List<int> _W
 		{
 			get;
@@ -79,7 +81,7 @@ namespace GraphesLabWork1
 				{
 					if (skip != null && skip.Contains(i))
 						continue;
-					fw.WriteLine("{0} -- {1}[label=\"{2}\"];", _I[i], _J[i], _W[i]);
+					fw.WriteLine("{0} -- {1}[label=\"{2}\",weight=\"{2}\"];", _I[i], _J[i], _W[i]);
 				}
 				fw.Write(end);
 			}
