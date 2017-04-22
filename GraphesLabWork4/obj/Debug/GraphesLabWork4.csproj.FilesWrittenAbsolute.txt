@@ -1,0 +1,8 @@
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/bin/Debug/GraphesLabWork4.exe.mdb
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/bin/Debug/GraphesLabWork4.exe
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/obj/Debug/GraphesLabWork4.exe
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/obj/Debug/GraphesLabWork4.exe.mdb
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/bin/Debug/GraphesLabWork1.exe
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/bin/Debug/GraphesLabWork1.exe.mdb
+/Users/macbook/Projects/GraphEdit/GraphesLabWork4/bin/Debug/GraphesLabWork1.pdb

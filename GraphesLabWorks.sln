@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphesLabWork3", "GraphesL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphesLabWork2", "GraphesLabWork2\GraphesLabWork2.csproj", "{3A3E9617-D393-4B52-A02C-0B7F97AAD981}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphesLabWork4", "GraphesLabWork4\GraphesLabWork4.csproj", "{743F8428-FE6F-4961-B04C-42C441E31D1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3A3E9617-D393-4B52-A02C-0B7F97AAD981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A3E9617-D393-4B52-A02C-0B7F97AAD981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A3E9617-D393-4B52-A02C-0B7F97AAD981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743F8428-FE6F-4961-B04C-42C441E31D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743F8428-FE6F-4961-B04C-42C441E31D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743F8428-FE6F-4961-B04C-42C441E31D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743F8428-FE6F-4961-B04C-42C441E31D1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
