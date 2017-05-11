@@ -8,10 +8,12 @@ namespace GraphesLabWork4
 		public static void Main(string[] args)
 		{
 			var L = new List<int>{ 11, 12, 56, 88, 34, 0, 3, 77, 55, 13, 21, 6 };
-			var H = new Heap<int>(L, (int x, int y) => x.CompareTo(y), HeapMode.Descending);
+			var H = new Heap<int>(L, (int x, int y) => x.CompareTo(y), HeapMode.Ascending);
 			//Console.Write("\n{0}", H.Find(11, 0));
-			H.Remove(H.Find(11, 0));
-			H.Remove(H.Find(77, 0));
+			//H.Remove(H.Find(11, 0));
+			//H.Remove(H.Find(77, 0));
+			Console.WriteLine(H.Find(56, 0));
+			//H.Change(4, 14);
 			H.PrintToConsole();
 			//H.Remove(7);
 			var I = new List<int>();
@@ -72,6 +74,48 @@ namespace GraphesLabWork4
 							RepairToLeaves = DescRepairToLeaves;
 							Heapify = DescMakeHeap;
                             Heapify();
+
+							Find = (a0, i0) =>
+							{
+								int child1 = i0 * 2 + 1;
+								int child2 = child1 + 1;
+								if (child2 >= array.Length)
+								{
+									if (child1 >= array.Length)
+										return -1;
+									if (comp(array[child1], a0) == 0)
+										return child1;
+									return -1;
+								}
+								if (comp(array[child1], a0) > 0 && comp(array[child1], a0) > 0)
+									return -1;
+								if (comp(array[child1], a0) == 0)
+									return child1;
+								int f1 = Find(a0, child1);
+								if (f1 != -1)
+									return f1;
+								
+								if (comp(array[child2], a0) == 0)
+									return child2;
+								f1 = Find(a0, child2);
+								if (f1 != -1)
+									return f1;
+								return -1;
+							};
+
+							Change = (i0, val) =>
+							{
+								if (comp(array[i0], val) > 0)
+								{
+									array[i0] = val;
+									RepairToRoot(i0);
+								}
+								if (comp(array[i0], val) < 0)
+								{
+									array[i0] = val;
+									RepairToLeaves(i0);
+								}
+							};
 							break;
 						}
 					case HeapMode.Ascending:
@@ -80,6 +124,48 @@ namespace GraphesLabWork4
 							RepairToLeaves = AscRepairInner;
 							Heapify = AscHeapify;
 							Heapify();
+
+							Find = (a0, i0) =>
+							{
+								int child1 = i0 * 2 + 1;
+								int child2 = child1 + 1;
+								if (child2 >= array.Length)
+								{
+									if (child1 >= array.Length)
+										return -1;
+									if (comp(array[child1], a0) == 0)
+										return child1;
+									return -1;
+								}
+								if (comp(array[child1], a0) < 0 && comp(array[child1], a0) < 0)
+									return -1;
+								if (comp(array[child1], a0) == 0)
+									return child1;
+								int f1 = Find(a0, child1);
+								if (f1 != -1)
+									return f1;
+								
+								if (comp(array[child2], a0) == 0)
+									return child2;
+								f1 = Find(a0, child2);
+								if (f1 != -1)
+									return f1;
+								return -1;
+							};
+
+							Change = (i0, val) =>
+							{
+								if (comp(array[i0], val) > 0)
+								{
+									array[i0] = val;
+									RepairToLeaves(i0);
+								}
+								if (comp(array[i0], val) < 0)
+								{
+									array[i0] = val;
+									RepairToRoot(i0);
+								}
+							};
 							break;
 						}
 				}
@@ -93,47 +179,6 @@ namespace GraphesLabWork4
 				array[i] = list[i];
 			comp = c;
 			Mode = m;
-
-			Find = (a0, i0) =>
-			{
-				int child1 = i0 * 2 + 1;
-				int child2 = child1 + 1;
-				if (child2 >= array.Length)
-				{
-					if (child1 >= array.Length)
-						return -1;
-					if (comp(array[child1], a0) == 0)
-						return child1;
-					return -1;
-				}
-				if (comp(array[child1], a0) > 0 && comp(array[child1], a0) > 0)
-					return -1;
-				if (comp(array[child1], a0) == 0)
-					return child1;
-				int f1 = Find(a0, child1);
-				if (f1 != -1)
-					return f1;
-				
-				if (comp(array[child2], a0) == 0)
-					return child2;
-				f1 = Find(a0, child2);
-				if (f1 != -1)
-					return f1;
-				return -1;
-			};
-			Change = (i0, val) =>
-			{
-				if (comp(array[i0], val) > 0)
-				{
-					array[i0] = val;
-					RepairToRoot(i0);
-				}
-				if (comp(array[i0], val) < 0)
-				{
-					array[i0] = val;
-					RepairToLeaves(i0);
-				}
-			};
 
 		}
 

@@ -1,11 +1,11 @@
 graph{
-0 -- 1[label="1",weight="1"];
-0 -- 2[label="1",weight="1"];
 0 -- 3[label="2",weight="2"];
+0 -- 2[label="1",weight="1"];
+0 -- 1[label="1",weight="1"];
 1 -- 6[label="2",weight="2"];
 2 -- 5[label="1",weight="1"];
 2 -- 4[label="3",weight="3"];
-5 -- 7[label="1",weight="1"];
 5 -- 8[label="2",weight="2"];
-9 -- 6[label="2",weight="2"];
+5 -- 7[label="1",weight="1"];
+6 -- 9[label="2",weight="2"];
 }
