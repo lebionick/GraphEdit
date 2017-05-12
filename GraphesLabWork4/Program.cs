@@ -7,14 +7,11 @@ namespace GraphesLabWork4
 	{
 		public static void Main(string[] args)
 		{
-			var L = new List<int>{ 11, 12, 56, 88, 34, 0, 3, 77, 55, 13, 21, 6 };
+			var L = new List<int>{ 11, 12, 56, 88, 34, 0, 3, 77, 55, 13, 21, 6};
 			var H = new Heap<int>(L, (int x, int y) => x.CompareTo(y), HeapMode.Ascending);
-			//Console.Write("\n{0}", H.Find(11, 0));
-			//H.Remove(H.Find(11, 0));
-			//H.Remove(H.Find(77, 0));
-			Console.WriteLine(H.Find(56, 0));
-			//H.Change(4, 14);
+
 			H.PrintToConsole();
+
 			//H.Remove(7);
 			var I = new List<int>();
 			var J = new List<int>();
@@ -39,6 +36,17 @@ namespace GraphesLabWork4
 
 			var G = new GraphesLabWork1.Graph(I, J);
 			G.PrintToFile(@"../../output.gv");
+			//Pyra sort
+			var sorted = new List<int>();
+			int n = H.array.Length;
+			for (int i = 0; i<n; i++)
+			{
+				sorted.Add(H.Pick(0));
+			}
+			Console.WriteLine();
+			for (int i = 0; i<sorted.Count; i++)
+				Console.Write(sorted[i] + " ");
+			Console.WriteLine();
 		}
 	}
 
@@ -271,7 +279,7 @@ namespace GraphesLabWork4
 		void AscRepairExternal(int k0)
 		{
 			int k1;
-			for (int k = k0; k < (array.Length - 1) / 2; k = k1)
+			for (int k = k0; k < (array.Length) / 2; k = k1)
 			{
 				k1 = 2 * k + 1;
 				int k2 = k1 + 1;
@@ -297,14 +305,20 @@ namespace GraphesLabWork4
 
 		void DescMakeHeap()
 		{
-			for (int i = 0; i < array.Length; i++)
-				DescRepairToRoot(i);
+			//for (int i = 0; i < array.Length; i++)
+			//	DescRepairToRoot(i);
+			for (int i = array.Length / 2; i >= 0; i--)
+				DescRepairToLeaves(i);
 		}
 
 		void AscHeapify()
 		{
-			for (int k = (array.Length - 1) / 2; k < array.Length; k++)
-				AscRepairInner(k);
+			for (int k = array.Length /2; k >= 0; k--)
+			{
+				Console.WriteLine(array[k]);
+				AscRepairExternal(k);
+				Console.WriteLine(array[k]);
+			}
 		}
 
 		void swap(int i, int j)
